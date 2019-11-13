@@ -1,0 +1,23 @@
+﻿@model QuanLyCuaHangSach.Models.TheLoai
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<h2 class="text-info">Chi tiết Thể Loại</h2>
+
+<div class="p-4 border rounded">
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="TenTheLoai"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="TenTheLoai" disabled class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-id="@Model.IDTheLoai" class="btn btn-primary">Sửa đổi</a>
+        <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+    </div>
+</div>
