@@ -1,0 +1,42 @@
+﻿@model QuanLyCuaHangSach.Models.NhaCungCap
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<h2 class="text-info">Chi tiết Nhà Cung Cấp</h2>
+
+<div class="p-4 border rounded">
+    <div class="form-group row">
+        <!---->
+        <div class="col-2">
+            <label asp-for="TenNhaCungCap">Tên Nhà Cung Cấp</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="TenNhaCungCap" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <!---->
+        <div class="col-2">
+            <label asp-for="DiaChi">Địa Chỉ</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="DiaChi" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <!---->
+        <div class="col-2">
+            <label asp-for="SoDienThoai">Số Điện Thoại</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="SoDienThoai" disabled class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-id="@Model.IDNhaCungCap" class="btn btn-primary">Sửa đổi</a>
+        <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+    </div>
+</div>

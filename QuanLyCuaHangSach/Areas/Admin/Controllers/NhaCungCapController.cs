@@ -9,18 +9,18 @@ using QuanLyCuaHangSach.Models;
 namespace QuanLyCuaHangSach.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class NhaXuatBanController : Controller
+    public class NhaCungCapController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public NhaXuatBanController(ApplicationDbContext db)
+        public NhaCungCapController(ApplicationDbContext db)
         {
             this._db = db;
         }
         public IActionResult Index()
         {
-            return View(_db.NhaXuatBan.ToList());
+            return View(_db.NhaCungCap.ToList());
         }
-        
+
         //GET Create Action Method
         public IActionResult Create()
         {
@@ -30,15 +30,15 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
         //POST Create action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NhaXuatBan nhaXuatBan)
+        public async Task<IActionResult> Create(NhaCungCap nhaCungCap)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(nhaXuatBan);
+                _db.Add(nhaCungCap);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(nhaXuatBan);
+            return View(nhaCungCap);
         }
 
 
@@ -50,32 +50,32 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var nhaXuatBan = await _db.NhaXuatBan.FindAsync(id);
-            if (nhaXuatBan == null)
+            var nhaCungCap = await _db.NhaCungCap.FindAsync(id);
+            if (nhaCungCap == null)
             {
                 return NotFound();
             }
 
-            return View(nhaXuatBan);
+            return View(nhaCungCap);
         }
 
         //POST Edit action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, NhaXuatBan nhaXuatBan)
+        public async Task<IActionResult> Edit(int id, NhaCungCap nhaCungCap)
         {
-            if (id != nhaXuatBan.IDNhaXuatBan)
+            if (id != nhaCungCap.IDNhaCungCap)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _db.Update(nhaXuatBan);
+                _db.Update(nhaCungCap);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(nhaXuatBan);
+            return View(nhaCungCap);
         }
 
         //GET Details Action Method
@@ -86,13 +86,13 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var nhaXuatBan = await _db.NhaXuatBan.FindAsync(id);
-            if (nhaXuatBan == null)
+            var nhaCungCap = await _db.NhaCungCap.FindAsync(id);
+            if (nhaCungCap == null)
             {
                 return NotFound();
             }
 
-            return View(nhaXuatBan);
+            return View(nhaCungCap);
         }
 
         //GET Delete Action Method
@@ -103,13 +103,13 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var nhaXuatBan = await _db.NhaXuatBan.FindAsync(id);
-            if (nhaXuatBan == null)
+            var nhaCungCap = await _db.NhaCungCap.FindAsync(id);
+            if (nhaCungCap == null)
             {
                 return NotFound();
             }
 
-            return View(nhaXuatBan);
+            return View(nhaCungCap);
         }
 
         //POST Delete action Method
@@ -117,8 +117,8 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nhaXuatBan = await _db.NhaXuatBan.FindAsync(id);
-            _db.NhaXuatBan.Remove(nhaXuatBan);
+            var nhaCungCap = await _db.NhaCungCap.FindAsync(id);
+            _db.NhaCungCap.Remove(nhaCungCap);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

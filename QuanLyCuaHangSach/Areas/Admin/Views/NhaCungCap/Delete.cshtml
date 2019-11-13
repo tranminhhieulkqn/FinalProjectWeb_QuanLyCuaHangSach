@@ -1,20 +1,20 @@
-﻿@model QuanLyCuaHangSach.Models.NhaXuatBan
+﻿@model QuanLyCuaHangSach.Models.NhaCungCap
 @{
     ViewData["Title"] = "Delete";
 }
 
 <br />
-<h2 class="text-info">Xóa Tác Giả</h2>
+<h2 class="text-info">Xóa Nhà Cung Cấp</h2>
 
 <form method="post" asp-action="Delete">
     <div class="p-4 border rounded">
         <div class="form-group row">
             <!---->
             <div class="col-2">
-                <label asp-for="TenNhaXuatBan">Tên Nhà Xuất Bản</label>
+                <label asp-for="TenNhaCungCap">Tên Nhà Cung Cấp</label>
             </div>
             <div class="col-5">
-                <input asp-for="TenNhaXuatBan" disabled class="form-control" />
+                <input asp-for="TenNhaCungCap" disabled class="form-control" />
             </div>
         </div>
         <div class="form-group row">
@@ -29,24 +29,15 @@
         <div class="form-group row">
             <!---->
             <div class="col-2">
-                <label asp-for="Email">Email</label>
+                <label asp-for="SoDienThoai">Số Điện Thoại</label>
             </div>
             <div class="col-5">
-                <input asp-for="Email" disabled class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <!---->
-            <div class="col-2">
-                <label asp-for="ThongTinNguoiDaiDien">Info Người đại diện</label>
-            </div>
-            <div class="col-5">
-                <input asp-for="ThongTinNguoiDaiDien" disabled class="form-control" />
+                <input asp-for="SoDienThoai" disabled class="form-control" />
             </div>
         </div>
         <br />
         <div class="form-group">
-            <input type="submit" class="btn btn-danger" asp-route-id="@Model.IDNhaXuatBan" value="Xóa" />
+            <input type="submit" class="btn btn-danger" asp-route-id="@Model.IDNhaCungCap" value="Xóa" />
             <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
         </div>
     </div>
