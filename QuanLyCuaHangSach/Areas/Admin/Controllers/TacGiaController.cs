@@ -6,19 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using QuanLyCuaHangSach.Data;
 using QuanLyCuaHangSach.Models;
 
-namespace QuanLyCuaHangSach.Areas.Admin
+namespace QuanLyCuaHangSach.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TheLoaiController : Controller
+    public class TacGiaController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public TheLoaiController(ApplicationDbContext db)
+        public TacGiaController(ApplicationDbContext db)
         {
             this._db = db;
         }
         public IActionResult Index()
         {
-            return View(_db.TheLoai.ToList());
+            return View(_db.TacGia.ToList());
         }
 
         //GET Create Action Method
@@ -30,15 +30,15 @@ namespace QuanLyCuaHangSach.Areas.Admin
         //POST Create action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TheLoai theLoai)
+        public async Task<IActionResult> Create(TacGia tacGia)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(theLoai);
+                _db.Add(tacGia);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(theLoai);
+            return View(tacGia);
         }
 
 
@@ -50,32 +50,32 @@ namespace QuanLyCuaHangSach.Areas.Admin
                 return NotFound();
             }
 
-            var theLoai = await _db.TheLoai.FindAsync(id);
-            if (theLoai == null)
+            var tacGia = await _db.TacGia.FindAsync(id);
+            if (tacGia == null)
             {
                 return NotFound();
             }
 
-            return View(theLoai);
+            return View(tacGia);
         }
 
         //POST Edit action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, TheLoai theLoai)
+        public async Task<IActionResult> Edit(int id, TacGia tacGia)
         {
-            if (id != theLoai.IDTheLoai)
+            if (id != tacGia.IDTacGia)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _db.Update(theLoai);
+                _db.Update(tacGia);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(theLoai);
+            return View(tacGia);
         }
 
         //GET Details Action Method
@@ -86,15 +86,14 @@ namespace QuanLyCuaHangSach.Areas.Admin
                 return NotFound();
             }
 
-            var theLoai = await _db.TheLoai.FindAsync(id);
-            if (theLoai == null)
+            var tacGia = await _db.TacGia.FindAsync(id);
+            if (tacGia == null)
             {
                 return NotFound();
             }
 
-            return View(theLoai);
+            return View(tacGia);
         }
-
 
         //GET Delete Action Method
         public async Task<IActionResult> Delete(int? id)
@@ -104,13 +103,13 @@ namespace QuanLyCuaHangSach.Areas.Admin
                 return NotFound();
             }
 
-            var theLoai = await _db.TheLoai.FindAsync(id);
-            if (theLoai == null)
+            var tacGia = await _db.TacGia.FindAsync(id);
+            if (tacGia == null)
             {
                 return NotFound();
             }
 
-            return View(theLoai);
+            return View(tacGia);
         }
 
         //POST Delete action Method
@@ -118,8 +117,8 @@ namespace QuanLyCuaHangSach.Areas.Admin
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var theLoai = await _db.TheLoai.FindAsync(id);
-            _db.TheLoai.Remove(theLoai);
+            var tacGia = await _db.TacGia.FindAsync(id);
+            _db.TacGia.Remove(tacGia);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

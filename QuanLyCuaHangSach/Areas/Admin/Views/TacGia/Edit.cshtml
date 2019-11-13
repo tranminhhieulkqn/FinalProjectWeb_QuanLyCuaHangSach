@@ -1,0 +1,49 @@
+﻿@model QuanLyCuaHangSach.Models.TacGia
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<h2 class="text-info">Sửa đổi Tác Giả</h2>
+<form method="post" asp-action="Edit">
+    <div class="p-4 border rounded">
+        <input type="hidden" asp-for="IDTacGia" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="TenTacGia">Tên Tác Giả</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="TenTacGia" class="form-control" />
+            </div>
+            <span asp-validation-for="TenTacGia" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Website">Website</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Website" class="form-control" />
+            </div>
+            <span asp-validation-for="Website" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="GhiChu">Ghi Chú</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="GhiChu" class="form-control" />
+            </div>
+            <span asp-validation-for="GhiChu" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" asp-route-id="@Model.IDTacGia" value="Cập nhật" />
+            <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

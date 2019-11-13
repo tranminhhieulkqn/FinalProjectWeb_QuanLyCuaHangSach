@@ -1,0 +1,39 @@
+﻿@model QuanLyCuaHangSach.Models.TacGia
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<h2 class="text-info">Chi tiết Tác Giả</h2>
+
+<div class="p-4 border rounded">
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="TenTacGia">Tên Tác Giả</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="TenTacGia" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Website">Website</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Website" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="GhiChu">Ghi Chú</label>
+        </div>
+        <div class="col-5">
+            <input asp-for="GhiChu" disabled class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-id="@Model.IDTacGia" class="btn btn-primary">Sửa đổi</a>
+        <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+    </div>
+</div>
