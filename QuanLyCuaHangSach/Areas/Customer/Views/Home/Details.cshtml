@@ -1,0 +1,127 @@
+﻿@model QuanLyCuaHangSach.Models.Sach
+@using Microsoft.AspNetCore.Http;
+@using QuanLyCuaHangSach.Extensions;
+@using QuanLyCuaHangSach.Utility;
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Deatails";
+}
+
+<br />
+<h2 class="text-info">Thông tin Sách</h2>
+
+<form method="post">
+    <div class="p-4 border rounded row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="TenSach">Tên Sách</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="TenSach" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Gia">Giá</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Gia" class="form-control" readonly />
+                </div>
+            </div>
+            <!---->
+            <div class="form-group row">
+                <div class="col-4">
+                    <!--The Loai-->
+                    <label asp-for="TheLoai">Thể Loại</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="TheLoai.TenTheLoai" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="TacGia">Tác Giả</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="TacGia.TenTacGia" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="NhaXuatBan">Nhà Xuất Bản</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="NhaXuatBan.TenNhaXuatBan" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="NamXB">Năm Xuất Bản</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="NamXB" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    @{
+                        bool isInBag = false;
+                        List<int> gioHang = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang");
+                        if (gioHang != null && gioHang.Contains(@Model.IDSach))
+                        {
+                            isInBag = true;
+                        }
+                    }
+
+                    @if (isInBag)
+                    {
+                        <button type="submit" value="Xóa khỏi giỏ hàng" asp-action="Remove" asp-route-id="@Model.IDSach" class="btn btn-danger form-control">
+                            Xóa khỏi giỏ hàng
+                        </button>
+                    }
+                    else
+                    {
+                        @if (@Model.CoSan)
+                        {
+                            <button type="submit" value="Thêm vào giỏ hàng" asp-route-id="@Model.IDSach" class="btn btn-primary form-control">
+                                Thêm vào giỏ hàng
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" value="Thêm vào giỏ hàng" disabled class="btn btn-block form-control">
+                                Thêm vào giỏ hàng
+                            </button>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.Anh" width="100%" style="border-radius:5px; border:1px solid #bbb9b9;" />
+           <br /><br />
+            @if (Model.CoSan)
+            {
+                <div align="center">
+                    <img src="~/images/available.png" width="50%"/>
+                </div>
+            }
+        </div>
+
+        <br />
+        <div class="form-group">
+            <input hidden asp-for="IDSach" />
+            <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+        </div>
+    </div>
+</form>

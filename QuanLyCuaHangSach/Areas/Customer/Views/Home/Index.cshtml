@@ -1,8 +1,40 @@
-﻿@{
+﻿@model List<QuanLyCuaHangSach.Models.Sach>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Xin chào đã đến với Website Bán Sách</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<br />
+<br />
+<div class="row">
+    @foreach (var sach in Model)
+    {
+        <div class="col-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size:23px; color:steelblue;">@sach.TenSach</label>
+                    </h4>
+                </div>
+
+                <img class="card-img-top" style="height:100%" src="@sach.Anh" alt="Card Image" />
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <label style="font-size:20px; color:#a51313"><b>@sach.Gia</b>/sq.ft</label>
+                        </div>
+                        <a asp-action="Details" asp-controller="Home" class="btn btn-success btn-outline-info" asp-route-id="@sach.IDSach">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+

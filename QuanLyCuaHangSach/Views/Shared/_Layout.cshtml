@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using QuanLyCuaHangSach.Extensions;
+@using QuanLyCuaHangSach.Utility;
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Quản Lý Cửa Hàng Sách</a>
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">Quản Lý Cửa Hàng Sách</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,6 +41,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
                         </li>
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang") != null)
+                        {
+                            <li style="color:white">
+                                <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;
+                                    @{
+                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang").Count();
+                                    }
+                                    (@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color:white">
+                                <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;
+                                    @{
+                                        var count = 0;
+                                    }
+                                    (@count)
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
