@@ -1,0 +1,65 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.GioHangViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post">
+    <br /><br />
+    <h2 class="text-info">Giỏ Hàng của Bạn</h2>
+    <br />
+    @if (Model.Sach.Count > 0) 
+    {
+        <div class="container border border-secondary rounded" style="padding:15px">
+            <div class="row">
+                <div class="col-8" style="border-right:1px solid #bbb9b9;">
+                    <table class="table table-striped" width="100%">
+                        <tr class="table-info">
+                            <th style="text-align:center; width:20%;"></th>
+                            <th style="text-align:left;">
+                                <label asp-for="@Model.Sach.FirstOrDefault().TenSach">Tên Sách</label>
+                            </th>
+                            <th style="text-align:left;">
+                                <label asp-for="@Model.Sach.FirstOrDefault().Gia">Giá Sách</label>
+                            </th>
+                            <th style="text-align:left;">
+                                <label asp-for="@Model.Sach.FirstOrDefault().TheLoai.TenTheLoai">Thể Loại</label>
+                            </th>
+                            <th style="text-align:left;">
+                                <label asp-for="@Model.Sach.FirstOrDefault().TacGia.TenTacGia">Tác Giả</label>
+                            </th>
+                            <th style="text-align:left;"></th>
+                        </tr>
+                        @foreach (var item in Model.Sach)
+                        {
+                            <tr style="padding:50px">
+                                <td>
+                                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.IDSach">
+                                        <img src="@item.Anh" width="100%" style="margin: auto; display: block; border-radius:5px; border:1px solid #bbb9b9;" />
+                                    </a>
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(i => item.TenSach)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(i => item.Gia)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(i => item.TheLoai.TenTheLoai)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(i => item.TacGia.TenTacGia)
+                                </td>
+                                <td style="text-align:center">
+                                    <button type="submit" class="btn btn-danger form-control" asp-action="Remove" asp-route-id="@item.IDSach">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </table> 
+                </div>
+            </div>
+        </div> 
+    }
+
+</form>
