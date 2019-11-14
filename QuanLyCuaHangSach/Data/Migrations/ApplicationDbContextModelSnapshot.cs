@@ -430,6 +430,12 @@ namespace QuanLyCuaHangSach.Data.Migrations
                     b.Property<string>("Anh")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("CoSan")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Gia")
+                        .HasColumnType("float");
+
                     b.Property<int>("IDNhaXuatBan")
                         .HasColumnType("int");
 

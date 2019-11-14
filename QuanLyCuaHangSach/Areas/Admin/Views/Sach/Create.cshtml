@@ -1,0 +1,94 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.SachViewModel
+@using QuanLyCuaHangSach.Extensions
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">Tạo Sách mới</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Sach.TenSach">Tên Sách</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Sach.TenSach" class="form-control" />
+            </div>
+            <span asp-validation-for="Sach.TenSach" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Sach.Gia">Giá</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Sach.Gia" class="form-control" />
+            </div>
+            <span asp-validation-for="Sach.Gia" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Sach.Anh">Ảnh</label>
+            </div>
+            <div class="col-5">
+                <input type="file" name="files" class="form-control" />
+            </div>
+        </div>
+        <!---->
+        <div class="form-group row">
+            <div class="col-2">
+                <!--The Loai-->
+                <label asp-for="TheLoai">Thể Loại</label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Sach.IDTheLoai" asp-items="Model.TheLoai.ToSelectListTheLoai(Model.Sach.IDTheLoai)" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="TacGia">Tác Giả</label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Sach.IDTacGia" asp-items="Model.TacGia.ToSelectListTacGia(Model.Sach.IDTacGia)" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="NhaXuatBan">Nhà Xuất Bản</label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Sach.IDNhaXuatBan" asp-items="Model.NhaXuatBan.ToSelectListNhaXuatBan(Model.Sach.IDNhaXuatBan)" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Sach.NamXB">Năm Xuất Bản</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Sach.NamXB" class="form-control" />
+            </div>
+            <span asp-validation-for="Sach.NamXB" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Sach.CoSan">Có sẵn</label>
+            </div>
+            <div class="col-5">
+                <input type="checkbox" asp-for="Sach.CoSan" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Tạo mới" />
+            <a asp-action="Index" class="btn btn-success">Quay lại danh sách</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<QuanLyCuaHangSach.Models.Sach>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Danh sách Sách</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; Thêm Sách</a>
+    </div>
+</div>
+
+<br />
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>Tên Sách</th>
+            <th>Giá</th>
+            <th>Có Sẵn</th>
+            <th>Thể Loại</th>
+            <th>Tác Giả</th>
+            <th>Nhà Xuất Bản</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.TenSach)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Gia)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.CoSan)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.TheLoai.TenTheLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.TacGia.TenTacGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.NhaXuatBan.TenNhaXuatBan)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.IDSach" />
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
