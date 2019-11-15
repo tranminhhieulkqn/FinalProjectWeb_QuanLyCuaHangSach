@@ -27,20 +27,30 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="TacGia" asp-action="Index">Tác Giả</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaXuatBan" asp-action="Index">Nhà Xuất Bản</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaCungCap" asp-action="Index">Nhà Cung Cấp</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
-                        </li>
+                        @if (User.IsInRole(SD.SuperAdminEndUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="TacGia" asp-action="Index">Tác Giả</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaXuatBan" asp-action="Index">Nhà Xuất Bản</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaCungCap" asp-action="Index">Nhà Cung Cấp</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Người Quản Trị</a>
+                            </li>
+                        }
+
                         @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang") != null)
                         {
                             <li style="color:white">

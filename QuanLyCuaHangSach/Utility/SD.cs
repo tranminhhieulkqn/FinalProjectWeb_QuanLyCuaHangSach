@@ -9,5 +9,8 @@ namespace QuanLyCuaHangSach.Utility
     {
         public const string DefaultSachImage = "default_image.png";
         public const string ImageFolder = @"images\SachImage";
+
+        public const string AdminEndUser = "Admin";
+        public const string SuperAdminEndUser = "Super Admin";
     }
 }

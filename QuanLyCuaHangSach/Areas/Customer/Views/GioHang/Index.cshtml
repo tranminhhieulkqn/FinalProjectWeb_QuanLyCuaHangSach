@@ -58,6 +58,40 @@
                         }
                     </table> 
                 </div>
+                <div class="col-4" style="padding-left:30px">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Tên Khách Hàng</label>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px">
+                            <input asp-for="@Model.PhieuXuat.KhachHang.TenKhachHang" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label>Địa Chỉ</label>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px">
+                            <input asp-for="@Model.PhieuXuat.KhachHang.DiaChi" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label>Số Điện Thoại</label>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px">
+                            <input asp-for="@Model.PhieuXuat.KhachHang.SoDienThoai" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label>Ngày Xuất</label>
+                        </div>
+                        <div class="col-12 " style="padding-bottom:15px">
+                            <input asp-for="@Model.PhieuXuat.NgayXuat" value="" type="text" id="datepicker" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label>Giờ Xuất</label>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px">
+                            <input asp-for="@Model.PhieuXuat.GioXuat" value="" type="text" id="" class="timepicker form-control" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div> 
     }

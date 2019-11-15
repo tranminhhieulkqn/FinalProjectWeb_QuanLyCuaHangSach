@@ -20,6 +20,9 @@ namespace QuanLyCuaHangSach.Models
         public KhachHang KhachHang { get; set; }
 
         public DateTime NgayXuat { get; set; }
+        
+        [NotMapped]
+        public DateTime GioXuat { get; set; }
         public bool DaXacNhan { get; set; }
 
         public ICollection<CTPhieuXuat> CTPhieuXuats { get; set; }
