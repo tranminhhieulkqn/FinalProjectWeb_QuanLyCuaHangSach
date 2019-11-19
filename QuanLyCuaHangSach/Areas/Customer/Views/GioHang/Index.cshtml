@@ -7,7 +7,7 @@
     <br /><br />
     <h2 class="text-info">Giỏ Hàng của Bạn</h2>
     <br />
-    @if (Model.Sach.Count > 0) 
+    @if (Model.Sach.Count > 0)
     {
         <div class="container border border-secondary rounded" style="padding:15px">
             <div class="row">
@@ -56,7 +56,7 @@
                                 </td>
                             </tr>
                         }
-                    </table> 
+                    </table>
                 </div>
                 <div class="col-4" style="padding-left:30px">
                     <div class="row">
@@ -64,36 +64,68 @@
                             <label>Tên Khách Hàng</label>
                         </div>
                         <div class="col-12" style="padding-bottom:15px">
-                            <input asp-for="@Model.PhieuXuat.KhachHang.TenKhachHang" class="form-control" />
+                            <input asp-for="@Model.GiaoDich.TenKhachHang" class="form-control" />
                         </div>
-                        <div class="col-12">
-                            <label>Địa Chỉ</label>
-                        </div>
-                        <div class="col-12" style="padding-bottom:15px">
-                            <input asp-for="@Model.PhieuXuat.KhachHang.DiaChi" class="form-control" />
-                        </div>
+
                         <div class="col-12">
                             <label>Số Điện Thoại</label>
                         </div>
                         <div class="col-12" style="padding-bottom:15px">
-                            <input asp-for="@Model.PhieuXuat.KhachHang.SoDienThoai" class="form-control" />
+                            <input asp-for="@Model.GiaoDich.SDTKhachHang" class="form-control" />
                         </div>
+
+                        <div class="col-12">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-12" style="padding-bottom:15px">
+                            <input asp-for="@Model.GiaoDich.EmailKhachHang" class="form-control" />
+                        </div>
+
                         <div class="col-12">
                             <label>Ngày Xuất</label>
                         </div>
                         <div class="col-12 " style="padding-bottom:15px">
-                            <input asp-for="@Model.PhieuXuat.NgayXuat" value="" type="text" id="datepicker" class="form-control" />
+                            <input asp-for="@Model.GiaoDich.NgayGiaoDich" value="" type="text" id="datepicker" class="form-control" />
                         </div>
                         <div class="col-12">
                             <label>Giờ Xuất</label>
                         </div>
                         <div class="col-12" style="padding-bottom:15px">
-                            <input asp-for="@Model.PhieuXuat.GioXuat" value="" type="text" id="" class="timepicker form-control" />
+                            <input asp-for="@Model.GiaoDich.GioGiaoDich" value="" type="text" id="" class="timepicker form-control" />
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" id="btnPlaceOrder" class="btn btn-success">Schedule Appointment</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+    }
+    else
+    {
+        <div>Không có sách nào trong giỏ hàng...</div>
     }
 
 </form>
+
+@section Scripts{
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '10',
+            maxTime: '3:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+    </script>
+}

@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-QuanLyCuaHangSach-C82A5F9E-A118-4C06-A886-1C43636D21F1</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20191119030304_AddGiaoDichandCTGiaoDich.cs" />
+    <Compile Remove="Data\Migrations\20191119030304_AddGiaoDichandCTGiaoDich.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />

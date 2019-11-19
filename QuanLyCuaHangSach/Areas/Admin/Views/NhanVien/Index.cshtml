@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QuanLyCuaHangSach.Models.NhanVien>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Danh sách Nhân Viên</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; Thêm Nhân Viên</a>
+    </div>
+</div>
+
+<br />
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>Tên Nhân Viên</th>
+            <th>Ngày Sinh</th>
+            <th>Số Điện Thoại</th>
+            <th>Ảnh Đại Diện</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.HoTen)
+                </td>
+                <td>
+                    $@Html.DisplayFor(m => item.NgaySinh)
+                </td>
+                <td class="custom-checkbox">
+                    @Html.DisplayFor(m => item.SoDienThoai)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(m => item.Anh)">
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.IDNhanVien" />
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>

@@ -168,12 +168,10 @@ namespace QuanLyCuaHangSach.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -210,12 +208,10 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -279,6 +275,55 @@ namespace QuanLyCuaHangSach.Data.Migrations
                     b.HasIndex("IDSach");
 
                     b.ToTable("CTPhieuXuat");
+                });
+
+            modelBuilder.Entity("QuanLyCuaHangSach.Models.ChiTietGiaoDich", b =>
+                {
+                    b.Property<int>("IDCTGiaoDich")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IDGiaoDich")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IDSach")
+                        .HasColumnType("int");
+
+                    b.HasKey("IDCTGiaoDich");
+
+                    b.HasIndex("IDGiaoDich");
+
+                    b.HasIndex("IDSach");
+
+                    b.ToTable("ChiTietGiaoDich");
+                });
+
+            modelBuilder.Entity("QuanLyCuaHangSach.Models.GiaoDich", b =>
+                {
+                    b.Property<int>("IDGiaoDich")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmailKhachHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NgayGiaoDich")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SDTKhachHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenKhachHang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("XacNhan")
+                        .HasColumnType("bit");
+
+                    b.HasKey("IDGiaoDich");
+
+                    b.ToTable("GiaoDich");
                 });
 
             modelBuilder.Entity("QuanLyCuaHangSach.Models.KhachHang", b =>
@@ -593,6 +638,21 @@ namespace QuanLyCuaHangSach.Data.Migrations
 
                     b.HasOne("QuanLyCuaHangSach.Models.Sach", "Sach")
                         .WithMany("CTPhieuXuats")
+                        .HasForeignKey("IDSach")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QuanLyCuaHangSach.Models.ChiTietGiaoDich", b =>
+                {
+                    b.HasOne("QuanLyCuaHangSach.Models.GiaoDich", "GiaoDich")
+                        .WithMany("ChiTietGiaoDichs")
+                        .HasForeignKey("IDGiaoDich")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuanLyCuaHangSach.Models.Sach", "Sach")
+                        .WithMany("ChiTietGiaoDichs")
                         .HasForeignKey("IDSach")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

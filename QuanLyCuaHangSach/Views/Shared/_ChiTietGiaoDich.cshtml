@@ -1,0 +1,46 @@
+﻿@model QuanLyCuaHangSach.Models.GiaoDich
+
+<h4 class="text-success">Chi tiết Giao Dịch</h4>
+
+<div style="height:100px; background-color:aliceblue" class="container border">
+    <div class="col-12">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-2">
+                Full Name
+            </div>
+            <div class="col-3">
+                <input asp-for="@Model.TenKhachHang" readonly class="form-control" />
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+                Email
+            </div>
+            <div class="col-3">
+                <input asp-for="@Model.EmailKhachHang" readonly class="form-control" />
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row" style="padding-top:10px;">
+            <div class="col-2">
+                Phone Number
+            </div>
+            <div class="col-3">
+                <input asp-for="@Model.SDTKhachHang" readonly class="form-control" />
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+                Appointment Date
+            </div>
+            <div class="col-3">
+                <input asp-for="@Model.NgayGiaoDich" readonly class="form-control" />
+            </div>
+
+        </div>
+    </div>
+</div>

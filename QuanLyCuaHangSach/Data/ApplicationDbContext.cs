@@ -25,5 +25,7 @@ namespace QuanLyCuaHangSach.Data
         public DbSet<CTPhieuXuat> CTPhieuXuat { get; set; }
         public DbSet<Sach> Sach { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<GiaoDich> GiaoDich { get; set; }
+        public DbSet<ChiTietGiaoDich> ChiTietGiaoDich { get; set; }
     }
 }

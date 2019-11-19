@@ -8,7 +8,7 @@ namespace QuanLyCuaHangSach.Models.ViewModel
     public class GioHangViewModel
     {
         public List<Sach> Sach { get; set; }
-        public PhieuXuat PhieuXuat { get; set; }
+        public GiaoDich GiaoDich { get; set; }
 
     }
 }

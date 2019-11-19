@@ -33,5 +33,6 @@ namespace QuanLyCuaHangSach.Models
 
         public ICollection<CTPhieuNhap> CTPhieuNhaps { get; set; }
         public ICollection<CTPhieuXuat> CTPhieuXuats { get; set; }
+        public ICollection<ChiTietGiaoDich> ChiTietGiaoDichs { get; set; }
     }
 }

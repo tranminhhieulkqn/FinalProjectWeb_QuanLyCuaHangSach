@@ -1,0 +1,18 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.GioHangViewModel
+@{
+    ViewData["Title"] = "GiaoDichConfirmation";
+}
+
+<br />
+<h2 class="text-info">Xác nhận Giao Dịch</h2>
+<div class="form-text">
+    Your appointment has been submitted. One of our awesome Sales Rep would be in touch shortly. Please feel free to contact us anytime you have any questions.
+</div>
+<br />
+
+<partial name="~/Views/Shared/_ChiTietGiaoDich.cshtml" model="Model.GiaoDich" />
+<br />
+
+<partial name="~/Views/Shared/_ChiTietDonHang.cshtml" model="Model.Sach" />
+
+<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success"> Back to Products</a>
