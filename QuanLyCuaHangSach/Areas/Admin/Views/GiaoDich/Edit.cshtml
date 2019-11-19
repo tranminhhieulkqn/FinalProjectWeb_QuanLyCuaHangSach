@@ -1,0 +1,152 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.ChiTietGiaoDichViewModel
+@using QuanLyCuaHangSach.Extensions
+@using QuanLyCuaHangSach.Utility
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<h2 class="text-info">Chỉnh sửa Giao Dịch</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded row">
+        <input hidden asp-for="GiaoDich.IDGiaoDich" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-6">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.TenKhachHang">Tên Khách Hàng</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.TenKhachHang" class="form-control" />
+                </div>
+                <span asp-validation-for="GiaoDich.TenKhachHang" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.EmailKhachHang">Email</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.EmailKhachHang" class="form-control" />
+                </div>
+                <span asp-validation-for="GiaoDich.EmailKhachHang" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.NgayGiaoDich">Ngày Giao Dịch</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.NgayGiaoDich" id="datepicker" type="text" class="form-control" />
+                </div>
+                <span asp-validation-for="GiaoDich.NgayGiaoDich" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.GioGiaoDich">Giờ Giao Dịch</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.GioGiaoDich" id="timepicker" type="text" class="timepicker form-control" />
+                </div>
+                <span asp-validation-for="GiaoDich.GioGiaoDich" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.SDTKhachHang">SĐT</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.SDTKhachHang" class="form-control" />
+                </div>
+                <span asp-validation-for="GiaoDich.SDTKhachHang" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.NguoiBan"></label>
+                </div>
+                <div class="col-8">
+                    @if (User.IsInRole(SD.AdminEndUser))
+                    {
+                        <input asp-for="@Model.GiaoDich.NguoiBan.Name" readonly class="form-control" />
+                        <input asp-for="@Model.GiaoDich.IDNguoiBan" hidden />
+
+                    }
+                    else
+                    {
+                        <select asp-for="@Model.GiaoDich.IDNguoiBan" asp-items="Model.NguoiBan.ToSelectListItemString(Model.GiaoDich.IDNguoiBan)" class="form-control"></select>
+
+                    }
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="GiaoDich.XacNhan"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="GiaoDich.XacNhan" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            @* Partial View *@
+            <partial name="~/Views/Shared/_ChiTietDonHang.cshtml" model="Model.Sach" />
+        </div>
+
+
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '10',
+            maxTime: '3:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+
+        $(document).ready(function () {
+            var appointmentTime = document.getElementById('datepicker').value;
+            var splitData = "";
+            if (appointmentTime.indexOf(" ") > 0) {
+                splitData = appointmentTime.split(" ");
+
+            }
+            else {
+                splitData = appointmentTime.split("T");
+
+            }
+
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+
+            }
+            var amPmTime = splitData[2];
+            $('#datepicker').attr('value', splitData[0]);
+            $('#timepicker').attr('value', time + ' ' + amPmTime);
+
+        });
+
+    </script>
+}
