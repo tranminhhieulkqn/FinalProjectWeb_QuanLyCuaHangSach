@@ -11,6 +11,12 @@ namespace QuanLyCuaHangSach.Models
     {
         [Key]
         public int IDGiaoDich { get; set; }
+
+        [Display(Name = "Người Bán")]
+        public string IDNguoiBan { get; set; }
+        [ForeignKey("IDNguoiBan")]
+        public virtual ApplicationUser NguoiBan { get; set; }
+
         public DateTime NgayGiaoDich { get; set; }
 
         [NotMapped]

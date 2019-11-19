@@ -57,6 +57,14 @@
                             </li>
                         }
 
+                        @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="GiaoDich" asp-action="Index">Giao Dịch</a>
+                            </li>
+
+                        }
+
                         @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang") != null)
                         {
                             <li style="color:white">
