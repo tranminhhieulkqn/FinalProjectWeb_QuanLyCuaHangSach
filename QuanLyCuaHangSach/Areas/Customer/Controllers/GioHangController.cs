@@ -30,7 +30,7 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
             List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
-            if (gioHang.Count > 0)
+            if (gioHang?.Count > 0)
             {
                 foreach (int item in gioHang)
                 {
