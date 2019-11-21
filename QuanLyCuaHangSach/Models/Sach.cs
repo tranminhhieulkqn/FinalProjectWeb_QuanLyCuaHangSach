@@ -25,14 +25,13 @@ namespace QuanLyCuaHangSach.Models
         public int IDNhaXuatBan { get; set; }
         public NhaXuatBan NhaXuatBan { get; set; }
 
+        public int SoLuongCoSan { get; set; }
         public bool CoSan { get; set; }
         public double Gia { get; set; }
 
         public string Anh { get; set; }
         public int NamXB { get; set; }
 
-        public ICollection<CTPhieuNhap> CTPhieuNhaps { get; set; }
-        public ICollection<CTPhieuXuat> CTPhieuXuats { get; set; }
         public ICollection<ChiTietGiaoDich> ChiTietGiaoDichs { get; set; }
     }
 }

@@ -41,26 +41,29 @@ namespace QuanLyCuaHangSach.Controllers
         }
 
         [HttpPost, ActionName("Details"), ValidateAntiForgeryToken]
-        public async Task<IActionResult> DetailsPOST(int id)
+        public async Task<IActionResult> DetailsPOST(int id, int soLuongMua)
         {
-            List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
-            if(gioHang == null)
+            List<SoLuong_Sach> gioHang = HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
+            if (gioHang == null)
             {
-                gioHang = new List<int>();
+                gioHang = new List<SoLuong_Sach>();
             }
-            gioHang.Add(id);
+            gioHang.Add(new SoLuong_Sach() { IDSach = id, SoLuongMua = soLuongMua});
             HttpContext.Session.Set("ssGioHang", gioHang);
             return RedirectToAction("Index", "Home", new { area = "Customer" });
         }
 
         public IActionResult Remove(int id)
         {
-            List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
-            if(gioHang.Count > 0)
+            List<SoLuong_Sach> gioHang = HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
+            if (gioHang.Count > 0)
             {
-                if (gioHang.Contains(id))
+                foreach (SoLuong_Sach item in gioHang)
                 {
-                    gioHang.Remove(id);
+                    if(item.IDSach == id)
+                    {
+                        gioHang.Remove(item); break;
+                    }
                 }
             }
             HttpContext.Session.Set("ssGioHang", gioHang);

@@ -9,6 +9,6 @@ namespace QuanLyCuaHangSach.Models.ViewModel
     {
         public List<Sach> Sach { get; set; }
         public GiaoDich GiaoDich { get; set; }
-
+        public KhachHang KhachHang { get; set; }
     }
 }

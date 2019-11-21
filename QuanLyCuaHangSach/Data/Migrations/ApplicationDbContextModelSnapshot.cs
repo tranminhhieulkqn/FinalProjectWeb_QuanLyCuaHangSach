@@ -168,10 +168,12 @@ namespace QuanLyCuaHangSach.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -208,10 +210,12 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -219,62 +223,6 @@ namespace QuanLyCuaHangSach.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.CTPhieuNhap", b =>
-                {
-                    b.Property<int>("IDCTPhieuNhap")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DonGia")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDPhieuNhap")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDSach")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoLuong")
-                        .HasColumnType("int");
-
-                    b.HasKey("IDCTPhieuNhap");
-
-                    b.HasIndex("IDPhieuNhap");
-
-                    b.HasIndex("IDSach");
-
-                    b.ToTable("CTPhieuNhap");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.CTPhieuXuat", b =>
-                {
-                    b.Property<int>("IDCTPhieuXuat")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DonGia")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDPhieuXuat")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDSach")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoLuong")
-                        .HasColumnType("int");
-
-                    b.HasKey("IDCTPhieuXuat");
-
-                    b.HasIndex("IDPhieuXuat");
-
-                    b.HasIndex("IDSach");
-
-                    b.ToTable("CTPhieuXuat");
                 });
 
             modelBuilder.Entity("QuanLyCuaHangSach.Models.ChiTietGiaoDich", b =>
@@ -288,6 +236,9 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IDSach")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoLuongMua")
                         .HasColumnType("int");
 
                     b.HasKey("IDCTGiaoDich");
@@ -306,27 +257,18 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EmailKhachHang")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IDNguoiBan")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IDKhachHang")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("NgayGiaoDich")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("SDTKhachHang")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenKhachHang")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("XacNhan")
                         .HasColumnType("bit");
 
                     b.HasKey("IDGiaoDich");
 
-                    b.HasIndex("IDNguoiBan");
+                    b.HasIndex("IDKhachHang");
 
                     b.ToTable("GiaoDich");
                 });
@@ -338,10 +280,10 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DiaChi")
+                    b.Property<string>("EmailKhachHang")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SoDienThoai")
+                    b.Property<string>("SDTKhachHang")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TenKhachHang")
@@ -350,27 +292,6 @@ namespace QuanLyCuaHangSach.Data.Migrations
                     b.HasKey("IDKhachHang");
 
                     b.ToTable("KhachHang");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.NhaCungCap", b =>
-                {
-                    b.Property<int>("IDNhaCungCap")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DiaChi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SoDienThoai")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenNhaCungCap")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IDNhaCungCap");
-
-                    b.ToTable("NhaCungCap");
                 });
 
             modelBuilder.Entity("QuanLyCuaHangSach.Models.NhaXuatBan", b =>
@@ -395,88 +316,6 @@ namespace QuanLyCuaHangSach.Data.Migrations
                     b.HasKey("IDNhaXuatBan");
 
                     b.ToTable("NhaXuatBan");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.NhanVien", b =>
-                {
-                    b.Property<int>("IDNhanVien")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Anh")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HoTen")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("NgaySinh")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SoDienThoai")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IDNhanVien");
-
-                    b.ToTable("NhanVien");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.PhieuNhap", b =>
-                {
-                    b.Property<int>("IDPhieuNhap")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("IDNhaCungCap")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDNhanVien")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("KhachHangIDKhachHang")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayNhap")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("IDPhieuNhap");
-
-                    b.HasIndex("IDNhaCungCap");
-
-                    b.HasIndex("IDNhanVien");
-
-                    b.HasIndex("KhachHangIDKhachHang");
-
-                    b.ToTable("PhieuNhap");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.PhieuXuat", b =>
-                {
-                    b.Property<int>("IDPhieuXuat")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("DaXacNhan")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("IDKhachHang")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDNhanVien")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayXuat")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("IDPhieuXuat");
-
-                    b.HasIndex("IDKhachHang");
-
-                    b.HasIndex("IDNhanVien");
-
-                    b.ToTable("PhieuXuat");
                 });
 
             modelBuilder.Entity("QuanLyCuaHangSach.Models.Sach", b =>
@@ -505,6 +344,9 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NamXB")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoLuongCoSan")
                         .HasColumnType("int");
 
                     b.Property<string>("TenSach")
@@ -618,36 +460,6 @@ namespace QuanLyCuaHangSach.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.CTPhieuNhap", b =>
-                {
-                    b.HasOne("QuanLyCuaHangSach.Models.PhieuNhap", "PhieuNhap")
-                        .WithMany("CTPhieuNhaps")
-                        .HasForeignKey("IDPhieuNhap")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanLyCuaHangSach.Models.Sach", "Sach")
-                        .WithMany("CTPhieuNhaps")
-                        .HasForeignKey("IDSach")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.CTPhieuXuat", b =>
-                {
-                    b.HasOne("QuanLyCuaHangSach.Models.PhieuXuat", "PhieuXuat")
-                        .WithMany("CTPhieuXuats")
-                        .HasForeignKey("IDPhieuXuat")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanLyCuaHangSach.Models.Sach", "Sach")
-                        .WithMany("CTPhieuXuats")
-                        .HasForeignKey("IDSach")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("QuanLyCuaHangSach.Models.ChiTietGiaoDich", b =>
                 {
                     b.HasOne("QuanLyCuaHangSach.Models.GiaoDich", "GiaoDich")
@@ -665,41 +477,9 @@ namespace QuanLyCuaHangSach.Data.Migrations
 
             modelBuilder.Entity("QuanLyCuaHangSach.Models.GiaoDich", b =>
                 {
-                    b.HasOne("QuanLyCuaHangSach.Models.ApplicationUser", "NguoiBan")
-                        .WithMany()
-                        .HasForeignKey("IDNguoiBan");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.PhieuNhap", b =>
-                {
-                    b.HasOne("QuanLyCuaHangSach.Models.NhaCungCap", "NhaCungCap")
-                        .WithMany("PhieuNhaps")
-                        .HasForeignKey("IDNhaCungCap")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanLyCuaHangSach.Models.NhanVien", "NhanVien")
-                        .WithMany("PhieuNhaps")
-                        .HasForeignKey("IDNhanVien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanLyCuaHangSach.Models.KhachHang", null)
-                        .WithMany("PhieuNhaps")
-                        .HasForeignKey("KhachHangIDKhachHang");
-                });
-
-            modelBuilder.Entity("QuanLyCuaHangSach.Models.PhieuXuat", b =>
-                {
                     b.HasOne("QuanLyCuaHangSach.Models.KhachHang", "KhachHang")
                         .WithMany()
                         .HasForeignKey("IDKhachHang")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanLyCuaHangSach.Models.NhanVien", "NhanVien")
-                        .WithMany("PhieuXuats")
-                        .HasForeignKey("IDNhanVien")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

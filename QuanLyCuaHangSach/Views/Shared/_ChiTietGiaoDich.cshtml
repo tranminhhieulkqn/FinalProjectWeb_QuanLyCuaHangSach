@@ -1,5 +1,6 @@
 ﻿@model QuanLyCuaHangSach.Models.GiaoDich
 
+
 <h4 class="text-success">Chi tiết Giao Dịch</h4>
 
 <div style="height:100px; background-color:aliceblue" class="container border">
@@ -9,7 +10,7 @@
                 Full Name
             </div>
             <div class="col-3">
-                <input asp-for="@Model.TenKhachHang" readonly class="form-control" />
+                <input asp-for="@Model.KhachHang.TenKhachHang" readonly class="form-control" />
             </div>
             <div class="col-2">
 
@@ -18,7 +19,7 @@
                 Email
             </div>
             <div class="col-3">
-                <input asp-for="@Model.EmailKhachHang" readonly class="form-control" />
+                <input asp-for="@Model.KhachHang.EmailKhachHang" readonly class="form-control" />
             </div>
 
         </div>
@@ -29,7 +30,7 @@
                 Phone Number
             </div>
             <div class="col-3">
-                <input asp-for="@Model.SDTKhachHang" readonly class="form-control" />
+                <input asp-for="@Model.KhachHang.SDTKhachHang" readonly class="form-control" />
             </div>
             <div class="col-2">
 

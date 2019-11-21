@@ -29,12 +29,12 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
+            List<SoLuong_Sach> gioHang = HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
             if (gioHang?.Count > 0)
             {
-                foreach (int item in gioHang)
+                foreach (SoLuong_Sach item in gioHang)
                 {
-                    Sach sach = _db.Sach.Include(m => m.TheLoai).Include(m => m.TacGia).Include(m => m.NhaXuatBan).Where(p => p.IDSach == item).FirstOrDefault();
+                    Sach sach = _db.Sach.Include(m => m.TheLoai).Include(m => m.TacGia).Include(m => m.NhaXuatBan).Where(p => p.IDSach == item.IDSach).FirstOrDefault();
                     GioHangVM.Sach.Add(sach);
                 }
             }
@@ -46,31 +46,54 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         [ActionName("Index")]
         public IActionResult IndexPost()
         {
-            List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
+            List<SoLuong_Sach> gioHang = HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
 
             GioHangVM.GiaoDich.NgayGiaoDich = GioHangVM.GiaoDich.NgayGiaoDich
                                                             .AddHours(GioHangVM.GiaoDich.GioGiaoDich.Hour)
                                                             .AddMinutes(GioHangVM.GiaoDich.GioGiaoDich.Minute);
 
+
+
+            //Add Khach Hang
+            KhachHang khachHang = GioHangVM.KhachHang;
+            _db.KhachHang.Add(khachHang);
+            _db.SaveChanges();
+
+            int idKhachHang = khachHang.IDKhachHang;
+
+            //Add Giao Dich
             GiaoDich giaoDich = GioHangVM.GiaoDich;
+            giaoDich.IDKhachHang = idKhachHang;
             _db.GiaoDich.Add(giaoDich);
             _db.SaveChanges();
 
             int appointmentId = giaoDich.IDGiaoDich;
 
-            foreach (int sachID in gioHang)
+            var sachDB = _db.Sach.ToList();
+
+            foreach (SoLuong_Sach item in gioHang)
             {
                 ChiTietGiaoDich chiTietGiaoDich = new ChiTietGiaoDich()
                 {
                     IDGiaoDich = appointmentId,
-                    IDSach = sachID
+                    IDSach = item.IDSach,
+                    SoLuongMua = item.SoLuongMua
                 };
+                for (int i = 0; i < sachDB.Count(); i++)
+                {
+                    if (item.IDSach == sachDB[i].IDSach)
+                    {
+                        sachDB[i].SoLuongCoSan -= item.SoLuongMua; break;
+                    }
+                }
+                _db.SaveChanges();
                 _db.ChiTietGiaoDich.Add(chiTietGiaoDich);
 
             }
             _db.SaveChanges();
-            gioHang = new List<int>();
+            gioHang = new List<SoLuong_Sach>();
             HttpContext.Session.Set("ssGioHang", gioHang);
+
 
             return RedirectToAction("GiaoDichConfirmation", "GioHang", new { Id = appointmentId });
             //return RedirectToAction("Index");
@@ -79,13 +102,16 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
 
         public IActionResult Remove(int id)
         {
-            List<int> gioHang = HttpContext.Session.Get<List<int>>("ssGioHang");
+            List<SoLuong_Sach> gioHang = HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
 
             if (gioHang.Count > 0)
             {
-                if (gioHang.Contains(id))
+                foreach (SoLuong_Sach item in gioHang)
                 {
-                    gioHang.Remove(id);
+                    if(item.IDSach == id)
+                    {
+                        gioHang.Remove(item); break;
+                    }
                 }
             }
 
@@ -99,8 +125,9 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         public IActionResult GiaoDichConfirmation(int id)
         {
             GioHangVM.GiaoDich = _db.GiaoDich.Where(a => a.IDGiaoDich == id).FirstOrDefault();
+            GioHangVM.KhachHang = _db.KhachHang.Where(a => a.IDKhachHang == GioHangVM.GiaoDich.IDKhachHang).FirstOrDefault();
             List<ChiTietGiaoDich> cTGiaoDich = _db.ChiTietGiaoDich.Where(p => p.IDGiaoDich == id).ToList();
-
+            
             foreach (ChiTietGiaoDich item in cTGiaoDich)
             {
                 GioHangVM.Sach.Add(_db.Sach.Include(p => p.TheLoai).Include(p => p.TacGia).Include(p => p.NhaXuatBan).Where(p => p.IDSach == item.IDSach).FirstOrDefault());

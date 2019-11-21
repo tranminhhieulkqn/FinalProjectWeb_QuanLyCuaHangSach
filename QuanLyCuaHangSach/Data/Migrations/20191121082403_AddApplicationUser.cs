@@ -2,7 +2,7 @@
 
 namespace QuanLyCuaHangSach.Data.Migrations
 {
-    public partial class AddApplicationUserToDatabase : Migration
+    public partial class AddApplicationUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

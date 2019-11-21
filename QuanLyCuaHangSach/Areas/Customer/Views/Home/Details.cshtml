@@ -2,7 +2,10 @@
 @using Microsoft.AspNetCore.Http;
 @using QuanLyCuaHangSach.Extensions;
 @using QuanLyCuaHangSach.Utility;
+@using QuanLyCuaHangSach.Data;
 
+
+@inject ApplicationDbContext _db
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
@@ -68,24 +71,42 @@
             <!--Test so luong-->
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="NamXB">Số Lượng</label>
+                    <label for="spinner" >Số Lượng Mua</label>
                 </div>
                 <div class="col-8">
-                    <input id="user_lic" type="number" min="5" max="30" step="1" value="1" />
+                    @{
+                        bool isInBag = false;
+                        List<SoLuong_Sach> gioHang = HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang");
+                        if (gioHang != null)
+                        {
+                            @foreach (SoLuong_Sach item in gioHang)
+                            {
+                                @if (item.IDSach == @Model.IDSach)
+                                {
+                                    <input asp-for="@item.SoLuongMua" readonly class="form-control" />
+                                    isInBag = true;
+                                }
+                            }
+                        }
+                        @if (!isInBag)
+                        {
+                            int maxSoLuong = _db.Sach.Where(s => s.IDSach == Model.IDSach).Select(s => s.SoLuongCoSan).FirstOrDefault();
+                            int defaulValue = 1, minSoLuong = 1;
+                            if (maxSoLuong == 0)
+                            {
+                                minSoLuong = 0; defaulValue = 0; 
+                            }
+                            <input id="spinner" name="soLuongMua" value="@defaulValue" min="@minSoLuong" max="@maxSoLuong">
+                            //@Html.Editor("soLuongMua", new { htmlAttributes = new { @class = "form-control" } })
+                        }
+                    }
+
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                 </div>
                 <div class="col-8">
-                    @{
-                        bool isInBag = false;
-                        List<int> gioHang = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssGioHang");
-                        if (gioHang != null && gioHang.Contains(@Model.IDSach))
-                        {
-                            isInBag = true;
-                        }
-                    }
 
                     @if (isInBag)
                     {

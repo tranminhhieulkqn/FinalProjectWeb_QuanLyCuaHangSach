@@ -1,4 +1,5 @@
 ﻿@model QuanLyCuaHangSach.Models.ViewModel.GioHangViewModel
+
 @{
     ViewData["Title"] = "GiaoDichConfirmation";
 }
@@ -13,6 +14,6 @@
 <partial name="~/Views/Shared/_ChiTietGiaoDich.cshtml" model="Model.GiaoDich" />
 <br />
 
-<partial name="~/Views/Shared/_ChiTietDonHang.cshtml" model="Model.Sach" />
+<partial name="~/Views/Shared/_ChiTietDonHang.cshtml" model="@Model" />
 
 <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success"> Back to Products</a>

@@ -14,6 +14,5 @@ namespace QuanLyCuaHangSach.Models
         public String DiaChi { get; set; }
         public String SoDienThoai { get; set; }
 
-        public ICollection<PhieuNhap> PhieuNhaps { get; set; }
     }
 }

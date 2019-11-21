@@ -19,6 +19,7 @@ using QuanLyCuaHangSach.Utility;
 namespace QuanLyCuaHangSach.Areas.Identity.Pages.Account
 {
     [Authorize(Roles = SD.SuperAdminEndUser)]
+    //[AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

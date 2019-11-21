@@ -11,9 +11,8 @@ namespace QuanLyCuaHangSach.Models
         [Key]
         public int IDKhachHang { get; set; }
         public String TenKhachHang { get; set; }
-        public String DiaChi { get; set; }
-        public String SoDienThoai { get; set; }
+        public String EmailKhachHang { get; set; }
+        public String SDTKhachHang { get; set; }
 
-        public ICollection<PhieuNhap> PhieuNhaps { get; set; }
     }
 }

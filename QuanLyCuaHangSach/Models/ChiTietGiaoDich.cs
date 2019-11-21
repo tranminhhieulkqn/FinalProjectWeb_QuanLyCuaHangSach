@@ -20,5 +20,7 @@ namespace QuanLyCuaHangSach.Models
         [ForeignKey("Sach")]
         public int IDSach { get; set; }
         public virtual Sach Sach { get; set; }
+        public int SoLuongMua { get; set; }
+        
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyCuaHangSach", "QuanLyCuaHangSach\QuanLyCuaHangSach.csproj", "{63F983AB-14A5-44F0-9381-B91F64443D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyCuaHangSach", "QuanLyCuaHangSach\QuanLyCuaHangSach.csproj", "{93E5FDA0-82F4-4C77-95BE-84B1C0F748F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{63F983AB-14A5-44F0-9381-B91F64443D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63F983AB-14A5-44F0-9381-B91F64443D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63F983AB-14A5-44F0-9381-B91F64443D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63F983AB-14A5-44F0-9381-B91F64443D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E5FDA0-82F4-4C77-95BE-84B1C0F748F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E5FDA0-82F4-4C77-95BE-84B1C0F748F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E5FDA0-82F4-4C77-95BE-84B1C0F748F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E5FDA0-82F4-4C77-95BE-84B1C0F748F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A5EC8351-9C57-4CB9-B970-1F8CC1250F21}
+		SolutionGuid = {55C81590-C5B6-49DC-A77C-BAA3C1854F4B}
 	EndGlobalSection
 EndGlobal

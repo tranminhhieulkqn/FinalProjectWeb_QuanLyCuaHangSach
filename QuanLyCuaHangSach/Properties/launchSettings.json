@@ -1,14 +1,10 @@
-{
+﻿{
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iis": {
-      "applicationUrl": "http://localhost/QuanLyCuaHangSach",
-      "sslPort": 0
-    },
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:64328/",
-      "sslPort": 44380
+      "applicationUrl": "http://localhost:60026",
+      "sslPort": 44330
     }
   },
   "profiles": {
@@ -17,16 +13,15 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "nativeDebugging": false
+      }
     },
     "QuanLyCuaHangSach": {
-      "commandName": "IISExpress",
+      "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      }
     }
   }
 }

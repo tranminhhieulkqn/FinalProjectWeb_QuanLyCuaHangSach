@@ -1,54 +1,60 @@
-﻿@model List<QuanLyCuaHangSach.Models.Sach>
+﻿@model QuanLyCuaHangSach.Models.ViewModel.GioHangViewModel
+
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@if (Model.Count > 0)
+@if (Model.Sach.Count > 0)
 {
-<table class="table table-striped" width="100%">
-    <tr class="table-info">
-        <th style="text-align:center; width:20%"></th>
-        <th style="text-align:center;">
-            <label asp-for="@Model.FirstOrDefault().TenSach"></label>
-        </th>
-        <th style="text-align:center;">
-            <label asp-for="@Model.FirstOrDefault().Gia"></label>
-        </th>
-        <th style="text-align:center;">
-            <label asp-for="@Model.FirstOrDefault().NamXB"></label>
-        </th>
-        <th style="text-align:center;">
-            <label asp-for="@Model.FirstOrDefault().TacGia.TenTacGia"></label>
-        </th>
-        <th style="text-align:center;"></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr style="padding:50px;">
-            <td>
-                <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.IDSach">
-                    <img src="@item.Anh" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
-                </a>
-            </td>
-            <td style="text-align:center">
-                @Html.DisplayFor(c => item.TenSach)
-            </td>
-            <td style="text-align:center">
-                @Html.DisplayFor(c => item.Gia)
-            </td>
-            <td style="text-align:center">
-                @Html.DisplayFor(c => item.NamXB)
-            </td>
-            <td style="text-align:center">
-                @Html.DisplayFor(c => item.TacGia.TenTacGia)
-            </td>
-            <td style="text-align:center">
-             
-            </td>
+    <table class="table table-striped" width="100%">
+        <tr class="table-info">
+            <th style="text-align:center; width:20%"></th>
+            <th style="text-align:center;">
+                <label asp-for="@Model.Sach.FirstOrDefault().TenSach">Tên Sách</label>
+            </th>
+            <th style="text-align:center;">
+                <label asp-for="@Model.Sach.FirstOrDefault().Gia">Giá Sách</label>
+            </th>
+            <th style="text-align:center;">
+                <label asp-for="@Model.Sach.FirstOrDefault().NamXB">Năm Xuất Bản</label>
+            </th>
+            <th style="text-align:center;">
+                <label asp-for="@Model.Sach.FirstOrDefault().TacGia.TenTacGia">Tên Tác Giả</label>
+            </th>
+            <th style="text-align:center;">
+                <label>Số Lượng</label>
+            </th>
+            <th style="text-align:center;"></th>
         </tr>
+        @foreach (var item in Model.Sach)
+        {
+            <tr style="padding:50px;">
+                <td>
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.IDSach">
+                        <img src="@item.Anh" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
+                    </a>
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(c => item.TenSach)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(c => item.Gia)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(c => item.NamXB)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(c => item.TacGia.TenTacGia)
+                </td>
+                <td style="text-align:center">
+                    @Model.GiaoDich.ChiTietGiaoDichs.Where(s => s.IDSach == item.IDSach && s.IDGiaoDich == Model.GiaoDich.IDGiaoDich ).Select(a => a.SoLuongMua).FirstOrDefault()
+                </td>
+                <td style="text-align:center">
+                </td>
+            </tr>
 
-    }
-</table>
+        }
+    </table>
 }
 else
 {
