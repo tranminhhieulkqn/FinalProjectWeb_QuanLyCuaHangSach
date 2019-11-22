@@ -142,7 +142,7 @@ namespace QuanLyCuaHangSach.Areas.Admin.Controllers
                 sachFromDb.TenSach = SachVM.Sach.TenSach;
                 sachFromDb.Gia = SachVM.Sach.Gia;
                 sachFromDb.NamXB = SachVM.Sach.NamXB;
-                sachFromDb.CoSan = SachVM.Sach.CoSan;
+                //sachFromDb.CoSan = SachVM.Sach.CoSan;
                 sachFromDb.IDTheLoai = SachVM.Sach.IDTheLoai;
                 sachFromDb.IDTacGia = SachVM.Sach.IDTacGia;
                 sachFromDb.IDNhaXuatBan = SachVM.Sach.IDNhaXuatBan;

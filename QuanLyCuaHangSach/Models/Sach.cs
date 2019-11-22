@@ -26,7 +26,7 @@ namespace QuanLyCuaHangSach.Models
         public NhaXuatBan NhaXuatBan { get; set; }
 
         public int SoLuongCoSan { get; set; }
-        public bool CoSan { get; set; }
+        //public bool CoSan { get; set; }
         public double Gia { get; set; }
 
         public string Anh { get; set; }
