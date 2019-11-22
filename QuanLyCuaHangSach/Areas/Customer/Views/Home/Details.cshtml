@@ -116,7 +116,7 @@
                     }
                     else
                     {
-                        @if (@Model.CoSan)
+                        @if (@Model.SoLuongCoSan > 0)
                         {
                             <button type="submit" value="Thêm vào giỏ hàng" asp-route-id="@Model.IDSach" class="btn btn-primary form-control">
                                 Thêm vào giỏ hàng
@@ -140,7 +140,7 @@
         <div class="col-3">
             <img src="@Model.Anh" width="100%" style="border-radius:5px; border:1px solid #bbb9b9;" />
            <br /><br />
-            @if (Model.CoSan)
+            @if (Model.SoLuongCoSan > 0)
             {
                 <div align="center">
                     <img src="~/images/available.png" width="50%"/>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,12 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
     public class GiaoDichController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private int PageSize = 3;
         public GiaoDichController(ApplicationDbContext db)
         {
             this._db = db;
         }
-        public async Task<IActionResult> Index(string searchName = null, string searchEmail = null, string searchPhone = null, string searchDate = null)
+        public async Task<IActionResult> Index(int productPage = 1, string searchName = null, string searchEmail = null, string searchPhone = null, string searchDate = null)
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
@@ -31,6 +33,29 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
             {
                 GiaoDich = new List<Models.GiaoDich>()
             };
+
+            StringBuilder param = new StringBuilder();
+            param.Append("/Admin/GiaoDich?productPage=:");
+            param.Append("&searchName=");
+            if (searchName != null)
+            {
+                param.Append(searchName);
+            }
+            param.Append("&searchEmail=");
+            if (searchEmail != null)
+            {
+                param.Append(searchEmail);
+            }
+            param.Append("&searchPhone=");
+            if (searchPhone != null)
+            {
+                param.Append(searchPhone);
+            }
+            param.Append("&searchDate=");
+            if (searchDate != null)
+            {
+                param.Append(searchDate);
+            }
 
             giaoDichVM.GiaoDich = _db.GiaoDich.Include(a => a.NguoiBan).Include(a => a.KhachHang).ToList();
 
@@ -66,7 +91,20 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
 
             }
 
+            var count = giaoDichVM.GiaoDich.Count;
 
+            giaoDichVM.GiaoDich = giaoDichVM.GiaoDich.OrderBy(p => p.NgayGiaoDich)
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize).ToList();
+
+
+            giaoDichVM.PagingInfo = new PagingInfo
+            {
+                CurrentPage = productPage,
+                ItemsPerPage = PageSize,
+                TotalItems = count,
+                urlParam = param.ToString()
+            };
 
 
             return View(giaoDichVM);

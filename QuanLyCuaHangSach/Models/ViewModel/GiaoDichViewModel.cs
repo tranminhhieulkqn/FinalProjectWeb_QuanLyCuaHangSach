@@ -8,6 +8,6 @@ namespace QuanLyCuaHangSach.Models.ViewModel
     public class GiaoDichViewModel
     {
         public List<GiaoDich> GiaoDich { get; set; }
-        //public PagingInfo PagingInfo { get; set; }
+        public PagingInfo PagingInfo { get; set; }
     }
 }
