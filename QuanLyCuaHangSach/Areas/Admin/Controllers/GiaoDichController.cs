@@ -174,7 +174,7 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
 
             ChiTietGiaoDichViewModel chiTietGiaoDichVM = new ChiTietGiaoDichViewModel()
             {
-                GiaoDich = _db.GiaoDich.Include(a => a.NguoiBan).Where(a => a.IDGiaoDich == id).FirstOrDefault(),
+                GiaoDich = _db.GiaoDich.Include(a => a.NguoiBan).Include(a => a.KhachHang).Include(a => a.ChiTietGiaoDichs).Where(a => a.IDGiaoDich == id).FirstOrDefault(),
                 NguoiBan = _db.ApplicationUser.ToList(),
                 Sach = sachList.ToList()
             };
@@ -190,6 +190,37 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var giaoDich = await _db.GiaoDich.FindAsync(id);
+            var khachHang = await _db.KhachHang.FindAsync(giaoDich.IDKhachHang);
+
+            var tableCTGiaoDich = _db.ChiTietGiaoDich.ToList();
+
+            var tableSach = _db.Sach.ToList();
+            foreach (var item in tableCTGiaoDich)
+            {
+                if (item.IDGiaoDich == giaoDich.IDGiaoDich)
+                {
+                    var ctGiaoDich = await _db.ChiTietGiaoDich.FindAsync(item.IDCTGiaoDich);
+                    //Cập nhật lại số sách trong kho nếu giao dịch không thành công
+                    foreach (var sach in tableSach)
+                    {
+                        if(sach.IDSach == ctGiaoDich.IDSach)
+                        {
+                            int update = sach.SoLuongCoSan + ctGiaoDich.SoLuongMua;
+                            var sachDB = await _db.Sach.FindAsync(ctGiaoDich.IDSach);
+                            sachDB.SoLuongCoSan = update;
+                            _db.Sach.Update(sachDB);
+                        }
+                    }
+
+                    _db.ChiTietGiaoDich.Remove(ctGiaoDich);
+                }
+            }
+
+            //foreach (var item in listCTGiaoDich)
+            //{
+            //    if(item.IDGiaoDich == giaoDich.IDGiaoDich) { }
+            //}
+            _db.KhachHang.Remove(khachHang);
             _db.GiaoDich.Remove(giaoDich);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
