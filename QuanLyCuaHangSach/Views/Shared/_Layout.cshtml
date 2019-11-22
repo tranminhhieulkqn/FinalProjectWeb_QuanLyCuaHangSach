@@ -52,6 +52,15 @@
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Quản Trị Viên</a>
                             </li>
                         }
+
+                        @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="GiaoDich" asp-action="Index">Giao Dịch</a>
+                            </li>
+
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>

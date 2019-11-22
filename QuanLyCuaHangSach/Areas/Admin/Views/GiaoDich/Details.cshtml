@@ -1,0 +1,127 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.ChiTietGiaoDichViewModel
+@using QuanLyCuaHangSach.Extensions
+@using QuanLyCuaHangSach.Utility
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<h2 class="text-info">Chi tiết Giao Dich</h2>
+
+<div class="p-4 border rounded row">
+    <div class="col-6">
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.KhachHang.TenKhachHang">Tên Khách Hàng</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.KhachHang.TenKhachHang" disabled class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.KhachHang.EmailKhachHang">Email</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.KhachHang.EmailKhachHang" disabled class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.NgayGiaoDich">Ngày Giao Dịch</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.NgayGiaoDich" disabled id="datepicker" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.GioGiaoDich">Giờ Giao Dịch</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.GioGiaoDich" disabled type="text" id="timepicker" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.KhachHang.SDTKhachHang">SĐT</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.KhachHang.SDTKhachHang" disabled class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.NguoiBan">Người Bán</label>
+            </div>
+            <div class="col-8">
+                @if (User.IsInRole(SD.AdminEndUser))
+                {
+                    <input asp-for="@Model.GiaoDich.NguoiBan.Name" disabled class="form-control" />
+                    <input asp-for="@Model.GiaoDich.IDNguoiBan" hidden />
+
+                }
+                else
+                {
+                    <select asp-for="@Model.GiaoDich.IDNguoiBan" disabled asp-items="Model.NguoiBan.ToSelectListItemString(Model.GiaoDich.IDNguoiBan)" class="form-control"></select>
+
+                }
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="GiaoDich.XacNhan">Xác Nhận</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="GiaoDich.XacNhan" disabled class="form-control" />
+            </div>
+        </div>
+
+    </div>
+    <div class="col-6">
+        @* Partial View *@
+        <partial name="~/Views/Shared/_ChiTietDonHang.cshtml" model="Model.Sach" />
+    </div>
+
+
+
+    <br />
+    <div class="form-group">
+
+        <a asp-action="Index" class="btn btn-success">Back to List</a>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script>
+
+        $(document).ready(function () {
+            var GiaoDichTime = document.getElementById('datepicker').value;
+            var splitData = "";
+            if (GiaoDichTime.indexOf(" ") > 0) {
+                splitData = GiaoDichTime.split(" ");
+
+            }
+            else {
+                splitData = GiaoDichTime.split("T");
+
+            }
+
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+
+            }
+            var amPmTime = splitData[2];
+            $('#datepicker').attr('value', splitData[0]);
+            $('#timepicker').attr('value', time + ' ' + amPmTime);
+
+        });
+
+    </script>
+}

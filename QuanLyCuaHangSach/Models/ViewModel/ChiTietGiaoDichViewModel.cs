@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyCuaHangSach.Models.ViewModel
 {
-    public class GioHangViewModel
+    public class ChiTietGiaoDichViewModel
     {
-        public List<Sach> Sach { get; set; }
         public GiaoDich GiaoDich { get; set; }
-        //public KhachHang KhachHang { get; set; }
+        public List<ApplicationUser> NguoiBan { get; set; }
+        public List<Sach> Sach { get; set; }
     }
 }

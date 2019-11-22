@@ -12,8 +12,10 @@ namespace QuanLyCuaHangSach.Models
         [Key]
         public int IDGiaoDich { get; set; }
 
+        public string IDNguoiBan { get; set; }
+        [ForeignKey("IDNguoiBan")]
+        public virtual ApplicationUser NguoiBan { get; set; }
 
-        
         public int IDKhachHang { get; set; }
         [ForeignKey("IDKhachHang")]
         public virtual KhachHang KhachHang { get; set; }

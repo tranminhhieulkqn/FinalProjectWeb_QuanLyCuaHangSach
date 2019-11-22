@@ -1,0 +1,145 @@
+﻿@model QuanLyCuaHangSach.Models.ViewModel.GiaoDichViewModel
+
+<form method="get">
+    <br /><br />
+    <h2 class="text-info">Danh sách Giao Dịch</h2>
+    <br />
+
+    <div style="height:150px; background-color:aliceblue" class="container">
+        @* We will add search criteria *@
+        <div class="col-12">
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Tên Khách Hàng
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Email
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchEmail", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Số Điện Thoại
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchPhone", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Ngày Giao Dịch
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                    <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    Nhân viên
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().NguoiBan.Name)*@
+                </th>
+                <th>
+                    Ngày Giao Dịch
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().NgayGiaoDich)*@
+                </th>
+                <th>
+                    Tên Khách Hàng
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().KhachHang.TenKhachHang)*@
+                </th>
+                <th>
+                    SĐT
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().KhachHang.SDTKhachHang)*@
+                </th>
+                <th>
+                    Email
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().KhachHang.EmailKhachHang)*@
+                </th>
+                <th>
+                    Xác Nhận
+                    @*@Html.DisplayNameFor(m => m.GiaoDich.FirstOrDefault().XacNhan)*@
+                </th>
+                <th>
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.GiaoDich)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.NguoiBan.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => item.NgayGiaoDich)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.KhachHang.TenKhachHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.KhachHang.SDTKhachHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.KhachHang.EmailKhachHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.XacNhan)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.IDGiaoDich" />
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+    
+
+
+</form>
+
+@section Scripts{
+    <script>
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+    </script>
+}

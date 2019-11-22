@@ -55,7 +55,7 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
 
 
             //Add Khach Hang
-            KhachHang khachHang = GioHangVM.KhachHang;
+            KhachHang khachHang = GioHangVM.GiaoDich.KhachHang;
             _db.KhachHang.Add(khachHang);
             _db.SaveChanges();
 
@@ -124,16 +124,31 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
         // Get
         public IActionResult GiaoDichConfirmation(int id)
         {
-            GioHangVM.GiaoDich = _db.GiaoDich.Where(a => a.IDGiaoDich == id).FirstOrDefault();
-            GioHangVM.KhachHang = _db.KhachHang.Where(a => a.IDKhachHang == GioHangVM.GiaoDich.IDKhachHang).FirstOrDefault();
+            GiaoDich giaoDich = _db.GiaoDich.Where(a => a.IDGiaoDich == id).FirstOrDefault();
+            giaoDich.KhachHang = _db.KhachHang.Where(a => a.IDKhachHang == giaoDich.IDKhachHang).FirstOrDefault();
             List<ChiTietGiaoDich> cTGiaoDich = _db.ChiTietGiaoDich.Where(p => p.IDGiaoDich == id).ToList();
-            
+
+            List<Sach> listSach = new List<Sach>();
             foreach (ChiTietGiaoDich item in cTGiaoDich)
             {
-                GioHangVM.Sach.Add(_db.Sach.Include(p => p.TheLoai).Include(p => p.TacGia).Include(p => p.NhaXuatBan).Where(p => p.IDSach == item.IDSach).FirstOrDefault());
+                listSach.Add(_db.Sach.Include(p => p.TheLoai).Include(p => p.TacGia).Include(p => p.NhaXuatBan).Where(p => p.IDSach == item.IDSach).FirstOrDefault());
             }
+            ChiTietGiaoDichViewModel chiTietGiaoDichVM = new ChiTietGiaoDichViewModel()
+            {
+                GiaoDich = _db.GiaoDich.Where(a => a.IDGiaoDich == id).FirstOrDefault(),
+                Sach = listSach
+            };
+            
+            //GioHangVM.GiaoDich = _db.GiaoDich.Where(a => a.IDGiaoDich == id).FirstOrDefault();
+            //GioHangVM.GiaoDich.KhachHang = _db.KhachHang.Where(a => a.IDKhachHang == GioHangVM.GiaoDich.IDKhachHang).FirstOrDefault();
+            //List<ChiTietGiaoDich> cTGiaoDich = _db.ChiTietGiaoDich.Where(p => p.IDGiaoDich == id).ToList();
+            
+            //foreach (ChiTietGiaoDich item in cTGiaoDich)
+            //{
+            //    GioHangVM.Sach.Add(_db.Sach.Include(p => p.TheLoai).Include(p => p.TacGia).Include(p => p.NhaXuatBan).Where(p => p.IDSach == item.IDSach).FirstOrDefault());
+            //}
 
-            return View(GioHangVM);
+            return View(chiTietGiaoDichVM);
         }
     }
 }
