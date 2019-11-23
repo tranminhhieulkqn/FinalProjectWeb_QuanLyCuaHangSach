@@ -185,7 +185,7 @@ namespace QuanLyCuaHangSach.Areas.Customer.Controllers
 
             ChiTietGiaoDichViewModel chiTietGiaoDichVM = new ChiTietGiaoDichViewModel()
             {
-                GiaoDich = _db.GiaoDich.Include(a => a.NguoiBan).Where(a => a.IDGiaoDich == id).FirstOrDefault(),
+                GiaoDich = _db.GiaoDich.Include(a => a.NguoiBan).Include(a => a.KhachHang).Include(a => a.ChiTietGiaoDichs).Where(a => a.IDGiaoDich == id).FirstOrDefault(),
                 NguoiBan = _db.ApplicationUser.ToList(),
                 Sach = sachList.ToList()
             };
