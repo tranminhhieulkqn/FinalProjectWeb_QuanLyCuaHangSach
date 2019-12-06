@@ -21,5 +21,6 @@ namespace QuanLyCuaHangSach.Data
         public DbSet<GiaoDich> GiaoDich { get; set; }
         public DbSet<ChiTietGiaoDich> ChiTietGiaoDich { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<PhieuNhap> PhieuNhap { get; set; }
     }
 }
