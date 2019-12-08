@@ -38,11 +38,11 @@
                 <td>
                     $@Html.DisplayFor(m => item.Gia)
                 </td>
-                <td class="custom-checkbox">
+                <td>
                     @{
                         bool coSan = (item.SoLuongCoSan > 0);
                     }
-                    @Html.DisplayFor(m => coSan)
+                    <input type="checkbox" readonly disabled class="form-control" asp-for="@coSan" />
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.TheLoai.TenTheLoai)

@@ -23,6 +23,9 @@
                 Tên người Quản Trị
             </th>
             <th>
+                Quyền cao nhất
+            </th>
+            <th>
                 Email
             </th>
             <th>
@@ -39,6 +42,12 @@
             <tr>
                 <td>
                     @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @{
+                        bool isSuperAdmin = (@item.NormalizedUserName.Contains("SUPER ADMIN"));
+                    }
+                    <input type="checkbox" readonly disabled class="form-control" asp-for="@item.NormalizedUserName.Contains("SUPER ADMIN")" />
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.Email)
