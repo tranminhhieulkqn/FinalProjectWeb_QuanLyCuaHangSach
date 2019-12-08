@@ -1,0 +1,145 @@
+﻿@model List<QuanLyCuaHangSach.Models.Sach>
+
+<form method="get">
+    <br /><br />
+    <h2 class="text-info">Tìm kiếm sách</h2>
+    <br />
+
+    <div style="height:150px; background-color:aliceblue" class="container">
+        @* We will add search criteria *@
+        <div class="col-12">
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Tên Sách
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Thể Loại
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchCategory", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Tên Tác Giả
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchAuthor", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Nhà Xuất Bản
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchPublishing", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                    <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th style="text-align:center; width:20%;"></th>
+                <th style="text-align:left;">
+                    Tên Sách
+                </th>
+                <th style="text-align:left;">
+                    Giá Sách
+                </th>
+                <th style="text-align:left;">
+                    Thể Loại
+                </th>
+                <th style="text-align:left;">
+                    Tác Giả
+                </th>
+                <th style="text-align:left;">
+                    Nhà Xuất Bản
+                </th>
+                <th style="text-align:left;">
+                    Số Lượng
+                </th>
+
+                <th style="text-align:left;"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@item.IDSach">
+                            <img src="@item.Anh" width="100%" style="margin:auto; display:block; border-radius:5px; border:1px solid #bbb9b9;" />
+                        </a>
+                    </td>
+                    <td>
+                        @item.TenSach
+                    </td>
+
+                    <td>
+                        @item.Gia
+                    </td>
+                    <td>
+                        @item.TheLoai.TenTheLoai
+                    </td>
+                    <td>
+                        @item.TacGia.TenTacGia
+                    </td>
+                    <td>
+                        @item.NhaXuatBan.TenNhaXuatBan
+                    </td>
+                    <td>
+                        @item.SoLuongCoSan
+                    </td>
+
+                    <td>
+                        <a style="width:auto" type="button" class="btn btn-success"  href="@Url.Action("AddAvailable/" + @item.IDSach).Replace("%2F","/")">
+                            Nhập hàng <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                        @*<button type="submit" class="btn btn-danger form-control" asp-action="AddAvailable" asp-route-id="@item.IDSach">
+                            Nhập hàng <i class="fas fa-sign-in-alt"></i>
+                        </button>*@
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+
+
+</form>
+
+@section Scripts{
+    <script>$(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });</script>
+}
