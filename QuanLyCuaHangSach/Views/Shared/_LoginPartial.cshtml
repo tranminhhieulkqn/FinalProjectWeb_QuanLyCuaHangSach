@@ -5,22 +5,21 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@*Hello @User.Identity.Name!*@ @await Component.InvokeAsync("UserName")</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    
+    <a  style="color:black; float:right; margin-right:-70px; font-size:20px; margin-top:10px" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@*Hello @User.Identity.Name!*@ @await Component.InvokeAsync("UserName")</a>
+    
+    
+    <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button style="float:right;margin-right:-250px;font-size:20px;font-size:15px;margin-top:10px" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
 }
 else
 {
-    <li class="nav-item">
+    @*<li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
+    </li>*@
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a style="color:black; float:right;margin-right:-90px;font-size:20px;margin-top:10px" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
 </ul>
