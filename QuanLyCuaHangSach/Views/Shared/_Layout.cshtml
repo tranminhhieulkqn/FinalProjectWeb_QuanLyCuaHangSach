@@ -11,92 +11,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - QuanLyCuaHangSach</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/jquery-ui.css" />
     <link rel="stylesheet" href="~/css/jquery.timepicker.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="~/menubar/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="~/menubar/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/menubar/css/component.css" />
+    <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
 <body>
-    
+    <section class="section section--menu" id="Antonio">
+        <h2 class="section__title">Xin chào đã đến với Website Bán Sách</h2>
+        <span class="link-copy"></span>
+        <nav class="menu menu--antonio">
+            <ul class="menu__list">
+                <li class="menu__item "><a href="#" class="menu__link">Home</a></li>
+                <li class="menu__item menu__item--current "><a  class="menu__link" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể loại</a></li>
+                <li class="menu__item"><a href="https://localhost:44330/Admin/TheLoai" class="menu__link">About</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Support</a></li>
+                <li class="menu__item"><a href="#" class="menu__link">Contact</a></li>
+            </ul>
+        </nav>
+    </section>
     @*<header>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">Quản Lý Cửa Hàng Sách</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang Chủ</a>
-                        </li>
-                        @if (User.IsInRole(SD.AdminEndUser))
-                        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">Quản Lý Cửa Hàng Sách</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Trang Chủ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="TacGia" asp-action="Index">Tác Giả</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaXuatBan" asp-action="Index">Nhà Xuất Bản</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
-                            </li>
-                        }
-                        @if (User.IsInRole(SD.SuperAdminEndUser))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Quản Trị Viên</a>
-                            </li>
-                        }
+                            @if (User.IsInRole(SD.AdminEndUser))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="TacGia" asp-action="Index">Tác Giả</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="NhaXuatBan" asp-action="Index">Nhà Xuất Bản</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
+                                </li>
+                            }
+                            @if (User.IsInRole(SD.SuperAdminEndUser))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Quản Trị Viên</a>
+                                </li>
+                            }
 
-                        @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
-                        {
+                            @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="GiaoDich" asp-action="Index">Giao Dịch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="PhieuNhap" asp-action="Index">Phiếu Nhập Hàng</a>
+                                </li>
+                            }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="GiaoDich" asp-action="Index">Giao Dịch</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="PhieuNhap" asp-action="Index">Phiếu Nhập Hàng</a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang") != null)
-                        {
-                            <li style="color:white">
-                                <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
-                                    <i class="fas fa-shopping-cart"></i>&nbsp;
-                                    @{
-                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang").Count();
-                                    }
-                                    (@count)
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="color:white">
-                                <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
-                                    <i class="fas fa-shopping-cart"></i>&nbsp;
-                                    @{
-                                        var count = 0;
-                                    }
-                                    (@count)
-                                </a>
-                            </li>
-                        }
-                    </ul>
+                            @if (HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang") != null)
+                            {
+                                <li style="color:white">
+                                    <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                                        <i class="fas fa-shopping-cart"></i>&nbsp;
+                                        @{
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang").Count();
+                                        }
+                                        (@count)
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="color:white">
+                                    <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                                        <i class="fas fa-shopping-cart"></i>&nbsp;
+                                        @{
+                                            var count = 0;
+                                        }
+                                        (@count)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>*@
+            </nav>
+        </header>*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -104,10 +120,10 @@
     </div>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - QuanLyCuaHangSach - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
+            <div class="container">
+                &copy; 2019 - QuanLyCuaHangSach - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -144,5 +160,44 @@
     <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
     <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+    <script src="~/menubar/js/classie.js"></script>
+    <script src="~/menubar/js/clipboard.min.js"></script>
+    <script>
+        (function () {
+            [].slice.call(document.querySelectorAll('.menu')).forEach(function (menu) {
+                var menuItems = menu.querySelectorAll('.menu__link'),
+                    setCurrent = function (ev) {
+                        ev.preventDefault();
+
+                        var item = ev.target.parentNode; // li
+
+                        // return if already current
+                        if (classie.has(item, 'menu__item--current')) {
+                            return false;
+                        }
+                        // remove current
+                        classie.remove(menu.querySelector('.menu__item--current'), 'menu__item--current');
+                        // set current
+                        classie.add(item, 'menu__item--current');
+                    };
+
+                [].slice.call(menuItems).forEach(function (el) {
+                    el.addEventListener('click', setCurrent);
+                });
+            });
+
+            [].slice.call(document.querySelectorAll('.link-copy')).forEach(function (link) {
+                link.setAttribute('data-clipboard-text', location.protocol + '//' + location.host + location.pathname + '#' + link.parentNode.id);
+                new Clipboard(link);
+                link.addEventListener('click', function () {
+                    classie.add(link, 'link-copy--animate');
+                    setTimeout(function () {
+                        classie.remove(link, 'link-copy--animate');
+                    }, 300);
+                });
+            });
+        })(window);
+    </script>
 </body>
 </html>
