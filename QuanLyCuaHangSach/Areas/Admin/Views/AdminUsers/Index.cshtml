@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<QuanLyCuaHangSach.Models.ApplicationUser>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Trị Viên";
 }
 
 <br />
@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-6">
-        <h2 class="text-info">Danh sách Người Dùng</h2>
+        <h2 class="text-info">Danh Sách Quản Trị Viên</h2>
     </div>
     <div class="col-6 text-right">
         <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; Thêm người Quản Trị</a>
@@ -20,10 +20,7 @@
     <table class="table table-striped border">
         <tr class="table-info">
             <th>
-                Tên người Quản Trị
-            </th>
-            <th>
-                Quyền cao nhất
+                Tên Quản Trị Viên
             </th>
             <th>
                 Email
@@ -42,12 +39,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(m => item.Name)
-                </td>
-                <td>
-                    @{
-                        bool isSuperAdmin = (@item.NormalizedUserName.Contains("SUPER ADMIN"));
-                    }
-                    <input type="checkbox" readonly disabled class="form-control" asp-for="@item.NormalizedUserName.Contains("SUPER ADMIN")" />
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.Email)

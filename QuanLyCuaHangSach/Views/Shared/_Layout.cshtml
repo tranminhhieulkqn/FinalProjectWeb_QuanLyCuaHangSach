@@ -17,6 +17,9 @@
     <link rel="stylesheet" type="text/css" href="~/menubar/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="~/menubar/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="~/menubar/css/component.css" />
+    @*<link rel="stylesheet" type="text/css" href="~/css/css/myMenu.css" />
+    <script src="~/js/js/myJs.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>*@
     <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -27,12 +30,70 @@
         <span class="link-copy"></span>
         <nav class="menu menu--antonio">
             <ul class="menu__list">
-                <li class="menu__item "><a href="#" class="menu__link">Home</a></li>
-                <li class="menu__item menu__item--current "><a  class="menu__link" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể loại</a></li>
-                <li class="menu__item"><a href="https://localhost:44330/Admin/TheLoai" class="menu__link">About</a></li>
-                <li class="menu__item"><a href="#" class="menu__link">Support</a></li>
-                <li class="menu__item"><a href="#" class="menu__link">Contact</a></li>
+                @*<li class="menu__item menu__item--current">
+                <a class="menu__link" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+            </li>*@
+                @if (User.IsInRole(SD.AdminEndUser))
+                {
+                    <li class="menu__item menu__item--current">
+                        <a class="menu__link" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể Loại</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="TacGia" asp-action="Index">Tác Giả</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="NhaXuatBan" asp-action="Index">Nhà Xuất Bản</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="Sach" asp-action="Index">Sách</a>
+                    </li>
+                }
+                @if (User.IsInRole(SD.SuperAdminEndUser))
+                {
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Quản Trị Viên</a>
+                    </li>
+                }
+
+                @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                {
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="GiaoDich" asp-action="Index">Giao Dịch</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" asp-area="Admin" asp-controller="PhieuNhap" asp-action="Index">Phiếu Nhập Hàng</a>
+                    </li>
+                }
+                @*<li class="menu__item"><a class="menu__link" asp-area="Admin" asp-controller="TheLoai" asp-action="Index">Thể loại</a></li>
+            <li class="menu__item"><a href="https://localhost:44330/Admin/TheLoai" class="menu__link">About</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">Support</a></li>
+            <li class="menu__item"><a href="#" class="menu__link">Contact</a></li>*@
+                @if (HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang") != null)
+                {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                            <i class="fas fa-shopping-cart"></i>&nbsp;
+                            @{
+                                var count = HttpContextAccessor.HttpContext.Session.Get<List<SoLuong_Sach>>("ssGioHang").Count();
+                            }
+                            (@count)
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="GioHang" asp-action="Index" class="nav-link text-dark">
+                            <i class="fas fa-shopping-cart"></i>&nbsp;
+                            @{
+                                var count = 0;
+                            }
+                            (@count)
+                        </a>
+                    </li>
+                }
             </ul>
+            <partial name="_LoginPartial" />
         </nav>
     </section>
     @*<header>
@@ -160,6 +221,8 @@
     <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
     <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+
 
     <script src="~/menubar/js/classie.js"></script>
     <script src="~/menubar/js/clipboard.min.js"></script>

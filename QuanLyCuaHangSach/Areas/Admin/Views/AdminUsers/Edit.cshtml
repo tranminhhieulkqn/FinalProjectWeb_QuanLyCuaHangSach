@@ -1,10 +1,10 @@
 ﻿@model QuanLyCuaHangSach.Models.ApplicationUser
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh Sửa Quản Trị Viên";
 }
 
 <br />
-<h2 class="text-info">Edit Admin User</h2>
+<h2 class="text-info">Chỉnh Sửa Quản Trị Viên</h2>
 
 <form method="post" asp-action="Edit">
     <div class="p-4 border rounded">
@@ -12,7 +12,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="Name"></label>
+                <label asp-for="Name">Tên Quản Trị Viên</label>
             </div>
             <div class="col-5">
                 <input asp-for="Name" class="form-control" />
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="Email"></label>
+                <label asp-for="Email">Email</label>
             </div>
             <div class="col-5">
                 <input asp-for="Email" readonly class="form-control" />
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="PhoneNumber"></label>
+                <label asp-for="PhoneNumber">Số Điện Thoại</label>
             </div>
             <div class="col-5">
                 <input asp-for="PhoneNumber" class="form-control" />
