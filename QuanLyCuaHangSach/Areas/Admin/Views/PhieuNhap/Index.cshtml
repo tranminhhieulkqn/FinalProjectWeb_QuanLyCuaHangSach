@@ -24,8 +24,8 @@
                 <th>Nhân viên</th>
                 <th>Ngày nhập</th>
                 <th>Số lượng</th>
+                <th>Đơn giá nhập</th>
                 <th>Mô tả</th>
-                <th></th>
                 <th></th>
             </tr>
 
@@ -45,8 +45,13 @@
                         @Html.DisplayFor(m => @item.SoLuong)
                     </td>
                     <td>
+                        @{
+                            double donGia = Convert.ToDouble(@item.SoLuong) * Convert.ToDouble(@item.Sach.Gia);
+                        }
+                        @Html.DisplayFor(m => @donGia)$
+                    </td>
+                    <td>
                         @Html.DisplayFor(m => @item.MoTa)
-                    </td><td>
                     </td>
                     <td></td>
                 </tr>
